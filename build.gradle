@@ -7,7 +7,7 @@ plugins {
 }
 
 group = 'com.deizon'
-version = '1.3.1'
+version = '1.4'
 sourceCompatibility = '11'
 
 bootJar {
@@ -33,7 +33,7 @@ publishing {
 		maven(MavenPublication) {
 			groupId = 'com.deizon.services'
 			artifactId = 'ServicesLibrary'
-			version = '1.3.1'
+			version = '1.4'
 
 			from components.java
 		}

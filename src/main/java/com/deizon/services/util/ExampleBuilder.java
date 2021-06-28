@@ -102,7 +102,12 @@ public class ExampleBuilder<T extends Entity> {
     @SuppressWarnings({"rawtypes", "unchecked"})
     private ExampleBuilder<T> process(String name, DataGetter getter, DataSetter setter) {
         if (getter.get() != null) {
-            setter.set(getter.get());
+            if (getter.get().equals("NULL")) {
+                setter.set(null);
+            } else {
+                setter.set(getter.get());
+            }
+
             this.matcher = this.matcher.withMatcher(name, this.propertyMatcher);
         }
 
