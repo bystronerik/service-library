@@ -18,8 +18,8 @@ public abstract class ScalarCoercing<T, I, O> implements Coercing<T, O> {
         this.clazz = clazz;
         this.inputClazz = inputClazz;
 
-        this.invalidTypeMessage = "Expected a " + this.clazz.getName() + " object.";
-        this.invalidInputMessage = "Not a valid " + this.clazz.getName() + " value: '%s'.";
+        this.invalidTypeMessage = "Expected a " + this.clazz.getSimpleName() + " object.";
+        this.invalidInputMessage = "Not a valid " + this.clazz.getSimpleName() + " value: '%s'.";
     }
 
     @Override

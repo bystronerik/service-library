@@ -1,13 +1,14 @@
 package com.deizon.services.exception;
 
 import graphql.ErrorType;
+import graphql.GraphQLError;
 import graphql.language.SourceLocation;
 import java.util.List;
 
-public class NotImplementedException extends BaseException {
+public abstract class BaseException extends RuntimeException implements GraphQLError {
 
-    public NotImplementedException() {
-        super("Function not implemented.");
+    public BaseException(String message) {
+        super(message);
     }
 
     @Override

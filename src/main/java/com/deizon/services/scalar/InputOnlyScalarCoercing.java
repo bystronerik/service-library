@@ -13,7 +13,7 @@ public abstract class InputOnlyScalarCoercing<T, I> extends ScalarCoercing<T, I,
 
         this.inputOnlyMessage = this.clazz.getName() + " is an input-only type";
         this.useVariableMessage =
-                "Must use variables to specify " + this.clazz.getName() + " values.";
+                "Must use variables to specify " + this.clazz.getSimpleName() + " values.";
     }
 
     @Override

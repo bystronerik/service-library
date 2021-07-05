@@ -1,5 +1,6 @@
 package com.deizon.services;
 
+import com.deizon.services.exception.BaseException;
 import com.deizon.services.exception.GraphQLAccessDeniedException;
 import graphql.ExceptionWhileDataFetching;
 import graphql.execution.DataFetcherExceptionHandler;
@@ -29,7 +30,11 @@ public class GraphQLExceptionHandler implements DataFetcherExceptionHandler {
 
         ExceptionWhileDataFetching error =
                 new ExceptionWhileDataFetching(path, exception, sourceLocation);
-        log.warn(error.getMessage(), exception);
+
+        if (!(exception instanceof BaseException)) {
+            log.warn(error.getMessage(), exception);
+        }
+
         return DataFetcherExceptionHandlerResult.newResult().error(error).build();
     }
 }
