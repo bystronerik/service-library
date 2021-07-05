@@ -94,6 +94,7 @@ public abstract class BaseService<
     protected T processData(T entity, U data) {
         if (this.createInputClass.isInstance(data)) {
             entity.setCreateDate(Instant.now());
+            entity.setDeleted(false);
         }
 
         if (this.updateInputClass.isInstance(data)) {
