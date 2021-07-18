@@ -1,6 +1,5 @@
 package com.deizon.services.model.settings;
 
-import com.deizon.services.model.Entity;
 import java.util.List;
 import lombok.*;
 
@@ -8,9 +7,10 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
-public class SettingsGroup extends Entity {
+@EqualsAndHashCode
+public class SettingsGroup {
 
+    private String id;
     private String name;
     private String description;
     private String parent;

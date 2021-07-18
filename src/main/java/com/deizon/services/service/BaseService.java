@@ -15,7 +15,7 @@ public abstract class BaseService<
                 U,
                 F extends FindInput,
                 R extends MongoRepository<T, String>>
-        implements IService<T, C, U, F> {
+        implements Service<T, C, U, F> {
 
     private final Class<C> createInputClass;
     private final Class<U> updateInputClass;

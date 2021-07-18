@@ -2,7 +2,7 @@ package com.deizon.services.service;
 
 import com.deizon.services.model.Entity;
 
-public interface IService<T extends Entity, C extends U, U, F> {
+public interface Service<T extends Entity, C extends U, U, F> {
 
     T find(F input);
 
