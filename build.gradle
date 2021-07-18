@@ -33,7 +33,7 @@ publishing {
 		maven(MavenPublication) {
 			groupId = 'com.deizon.services'
 			artifactId = 'ServicesLibrary'
-			version = '1.5.0'
+			version = getVersion()
 
 			from components.java
 		}

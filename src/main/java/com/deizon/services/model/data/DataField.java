@@ -1,9 +1,10 @@
 package com.deizon.services.model.data;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Data
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode

@@ -2,9 +2,10 @@ package com.deizon.services.model.settings;
 
 import com.deizon.services.model.data.DataField;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Data
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
