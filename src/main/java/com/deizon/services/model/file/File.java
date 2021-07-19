@@ -13,5 +13,5 @@ public class File extends Entity {
     private String directory;
     private String name;
     private String fileName;
-    private String type;
+    private FileType type;
 }
