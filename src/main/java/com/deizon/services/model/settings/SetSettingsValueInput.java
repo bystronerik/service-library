@@ -7,6 +7,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class SetSettingsValueInput {
 
-    private String settings;
     private String value;
 }

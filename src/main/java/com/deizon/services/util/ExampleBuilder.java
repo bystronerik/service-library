@@ -1,6 +1,5 @@
 package com.deizon.services.util;
 
-import com.deizon.services.model.Entity;
 import com.mongodb.BasicDBList;
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -10,7 +9,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.ExampleMatcher.GenericPropertyMatcher;
 
-public class ExampleBuilder<T extends Entity> {
+public class ExampleBuilder<T> {
 
     private final T entity;
     private ExampleMatcher matcher;

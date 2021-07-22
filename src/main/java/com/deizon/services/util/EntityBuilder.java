@@ -1,12 +1,11 @@
 package com.deizon.services.util;
 
-import com.deizon.services.model.Entity;
 import com.deizon.services.model.ListChange;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 
-public class EntityBuilder<T extends Entity> {
+public class EntityBuilder<T> {
 
     private final T entity;
 
