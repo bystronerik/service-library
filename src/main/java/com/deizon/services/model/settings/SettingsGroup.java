@@ -13,6 +13,6 @@ public class SettingsGroup {
     private String id;
     private String name;
     private String description;
-    private String parent;
+    private SettingsGroup parent;
     private List<Settings> settings;
 }
