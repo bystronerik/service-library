@@ -36,46 +36,52 @@ public class ExampleBuilder<T> {
         return this;
     }
 
+    @Deprecated
     public ExampleBuilder<T> stringField(
             String name, DataGetter<String> getter, DataSetter<String> setter) {
-        return this.process(name, getter, setter);
+        return this.field(name, getter, setter);
     }
 
+    @Deprecated
     public ExampleBuilder<T> integerField(
             String name, DataGetter<Integer> getter, DataSetter<Integer> setter) {
-        return this.process(name, getter, setter);
+        return this.field(name, getter, setter);
     }
 
+    @Deprecated
     public ExampleBuilder<T> doubleField(
             String name, DataGetter<Double> getter, DataSetter<Double> setter) {
-        return this.process(name, getter, setter);
+        return this.field(name, getter, setter);
     }
 
+    @Deprecated
     public ExampleBuilder<T> bigDecimalField(
             String name, DataGetter<BigDecimal> getter, DataSetter<BigDecimal> setter) {
-        return this.process(name, getter, setter);
+        return this.field(name, getter, setter);
     }
 
+    @Deprecated
     public ExampleBuilder<T> booleanField(
             String name, DataGetter<Boolean> getter, DataSetter<Boolean> setter) {
-        return this.process(name, getter, setter);
+        return this.field(name, getter, setter);
     }
 
+    @Deprecated
     public ExampleBuilder<T> datetimeField(
             String name, DataGetter<Instant> getter, DataSetter<Instant> setter) {
-        return this.process(name, getter, setter);
+        return this.field(name, getter, setter);
     }
 
+    @Deprecated
     public ExampleBuilder<T> objectField(
             String name, DataGetter<Object> getter, DataSetter<Object> setter) {
-        return this.process(name, getter, setter);
+        return this.field(name, getter, setter);
     }
 
-    public ExampleBuilder<T> enumField(
-            String name,
-            DataGetter<? extends Enum<?>> getter,
-            DataSetter<? extends Enum<?>> setter) {
-        return this.process(name, getter, setter);
+    @Deprecated
+    public <F extends Enum<?>> ExampleBuilder<T> enumField(
+            String name, DataGetter<F> getter, DataSetter<F> setter) {
+        return this.field(name, getter, setter);
     }
 
     public ExampleBuilder<T> listField(
@@ -98,8 +104,7 @@ public class ExampleBuilder<T> {
         return this;
     }
 
-    @SuppressWarnings({"rawtypes", "unchecked"})
-    private ExampleBuilder<T> process(String name, DataGetter getter, DataSetter setter) {
+    private <F> ExampleBuilder<T> field(String name, DataGetter<F> getter, DataSetter<F> setter) {
         if (getter.get() != null) {
             if (getter.get().equals("NULL")) {
                 setter.set(null);

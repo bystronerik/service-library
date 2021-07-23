@@ -7,7 +7,7 @@ plugins {
 }
 
 group = 'com.deizon'
-version = '2.2.2'
+version = '2.3.0'
 sourceCompatibility = '11'
 
 bootJar {

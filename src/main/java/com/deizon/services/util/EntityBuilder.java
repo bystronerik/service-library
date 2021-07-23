@@ -13,42 +13,51 @@ public class EntityBuilder<T> {
         this.entity = entity;
     }
 
+    @Deprecated
     public EntityBuilder<T> stringField(DataGetter<String> getter, DataSetter<String> setter) {
-        return this.process(getter, setter);
+        return this.field(getter, setter);
     }
 
+    @Deprecated
     public EntityBuilder<T> integerField(DataGetter<Integer> getter, DataSetter<Integer> setter) {
-        return this.process(getter, setter);
+        return this.field(getter, setter);
     }
 
+    @Deprecated
     public EntityBuilder<T> doubleField(DataGetter<Double> getter, DataSetter<Double> setter) {
-        return this.process(getter, setter);
+        return this.field(getter, setter);
     }
 
+    @Deprecated
     public EntityBuilder<T> bigDecimalField(
             DataGetter<BigDecimal> getter, DataSetter<BigDecimal> setter) {
-        return this.process(getter, setter);
+        return this.field(getter, setter);
     }
 
+    @Deprecated
     public EntityBuilder<T> booleanField(DataGetter<Boolean> getter, DataSetter<Boolean> setter) {
-        return this.process(getter, setter);
+        return this.field(getter, setter);
     }
 
+    @Deprecated
     public EntityBuilder<T> datetimeField(DataGetter<Instant> getter, DataSetter<Instant> setter) {
-        return this.process(getter, setter);
+        return this.field(getter, setter);
     }
 
+    @Deprecated
     public EntityBuilder<T> objectField(DataGetter<Object> getter, DataSetter<Object> setter) {
-        return this.process(getter, setter);
+        return this.field(getter, setter);
     }
 
-    public EntityBuilder<T> enumField(
-            DataGetter<? extends Enum<?>> getter, DataSetter<? extends Enum<?>> setter) {
-        return this.process(getter, setter);
+    @Deprecated
+    public <F extends Enum<?>> EntityBuilder<T> enumField(
+            DataGetter<F> getter, DataSetter<F> setter) {
+        return this.field(getter, setter);
     }
 
+    @Deprecated
     public EntityBuilder<T> listField(DataGetter<List<?>> getter, DataSetter<List<?>> setter) {
-        return this.process(getter, setter);
+        return this.field(getter, setter);
     }
 
     public EntityBuilder<T> listField(
@@ -60,8 +69,7 @@ public class EntityBuilder<T> {
         return this;
     }
 
-    @SuppressWarnings({"rawtypes", "unchecked"})
-    private EntityBuilder<T> process(DataGetter getter, DataSetter setter) {
+    private <F> EntityBuilder<T> field(DataGetter<F> getter, DataSetter<F> setter) {
         if (getter.get() != null) {
             setter.set(getter.get());
         }
