@@ -69,7 +69,7 @@ public class EntityBuilder<T> {
         return this;
     }
 
-    private <F> EntityBuilder<T> field(DataGetter<F> getter, DataSetter<F> setter) {
+    public <F> EntityBuilder<T> field(DataGetter<F> getter, DataSetter<F> setter) {
         if (getter.get() != null) {
             setter.set(getter.get());
         }

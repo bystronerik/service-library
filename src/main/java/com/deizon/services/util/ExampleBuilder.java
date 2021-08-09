@@ -104,7 +104,7 @@ public class ExampleBuilder<T> {
         return this;
     }
 
-    private <F> ExampleBuilder<T> field(String name, DataGetter<F> getter, DataSetter<F> setter) {
+    public <F> ExampleBuilder<T> field(String name, DataGetter<F> getter, DataSetter<F> setter) {
         if (getter.get() != null) {
             if (getter.get().equals("NULL")) {
                 setter.set(null);
