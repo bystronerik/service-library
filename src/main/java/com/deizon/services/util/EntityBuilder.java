@@ -56,7 +56,7 @@ public class EntityBuilder<T> {
     }
 
     @Deprecated
-    public EntityBuilder<T> listField(DataGetter<List<?>> getter, DataSetter<List<?>> setter) {
+    public <F> EntityBuilder<T> listField(DataGetter<List<F>> getter, DataSetter<List<F>> setter) {
         return this.field(getter, setter);
     }
 

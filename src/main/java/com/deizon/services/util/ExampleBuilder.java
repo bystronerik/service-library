@@ -84,8 +84,8 @@ public class ExampleBuilder<T> {
         return this.field(name, getter, setter);
     }
 
-    public ExampleBuilder<T> listField(
-            String name, DataGetter<List<?>> getter, DataSetter<List<?>> setter) {
+    public <F> ExampleBuilder<T> listField(
+            String name, DataGetter<List<F>> getter, DataSetter<List<F>> setter) {
         if (getter.get() != null) {
             setter.set(getter.get());
             this.matcher =
