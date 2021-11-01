@@ -14,7 +14,7 @@ public class FileUploadScalarCoercing extends InputOnlyScalarCoercing<FileUpload
     @Override
     protected FileUpload parseFromInput(Part input) {
         try {
-            return new FileUpload(input.getContentType(), input.getInputStream());
+            return new FileUpload(input.getContentType(), input.getSize(), input.getInputStream());
         } catch (IOException e) {
             throw new CoercingParseValueException("Couldn't read content of the uploaded file");
         }

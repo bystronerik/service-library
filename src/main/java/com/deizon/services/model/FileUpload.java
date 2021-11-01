@@ -10,5 +10,6 @@ import lombok.Getter;
 public class FileUpload {
 
     private final String contentType;
+    private final Long size;
     private final InputStream content;
 }
