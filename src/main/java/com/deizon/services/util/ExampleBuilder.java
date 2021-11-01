@@ -1,8 +1,6 @@
 package com.deizon.services.util;
 
 import com.mongodb.BasicDBList;
-import java.math.BigDecimal;
-import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Example;
@@ -34,54 +32,6 @@ public class ExampleBuilder<T> {
     public ExampleBuilder<T> exact() {
         this.propertyMatcher = new GenericPropertyMatcher().exact();
         return this;
-    }
-
-    @Deprecated
-    public ExampleBuilder<T> stringField(
-            String name, DataGetter<String> getter, DataSetter<String> setter) {
-        return this.field(name, getter, setter);
-    }
-
-    @Deprecated
-    public ExampleBuilder<T> integerField(
-            String name, DataGetter<Integer> getter, DataSetter<Integer> setter) {
-        return this.field(name, getter, setter);
-    }
-
-    @Deprecated
-    public ExampleBuilder<T> doubleField(
-            String name, DataGetter<Double> getter, DataSetter<Double> setter) {
-        return this.field(name, getter, setter);
-    }
-
-    @Deprecated
-    public ExampleBuilder<T> bigDecimalField(
-            String name, DataGetter<BigDecimal> getter, DataSetter<BigDecimal> setter) {
-        return this.field(name, getter, setter);
-    }
-
-    @Deprecated
-    public ExampleBuilder<T> booleanField(
-            String name, DataGetter<Boolean> getter, DataSetter<Boolean> setter) {
-        return this.field(name, getter, setter);
-    }
-
-    @Deprecated
-    public ExampleBuilder<T> datetimeField(
-            String name, DataGetter<Instant> getter, DataSetter<Instant> setter) {
-        return this.field(name, getter, setter);
-    }
-
-    @Deprecated
-    public ExampleBuilder<T> objectField(
-            String name, DataGetter<Object> getter, DataSetter<Object> setter) {
-        return this.field(name, getter, setter);
-    }
-
-    @Deprecated
-    public <F extends Enum<?>> ExampleBuilder<T> enumField(
-            String name, DataGetter<F> getter, DataSetter<F> setter) {
-        return this.field(name, getter, setter);
     }
 
     public <F> ExampleBuilder<T> listField(
