@@ -1,20 +1,18 @@
 package com.deizon.services.resolver;
 
-import graphql.kickstart.tools.GraphQLResolver;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import graphql.kickstart.servlet.context.DefaultGraphQLServletContext;
+import graphql.kickstart.tools.GraphQLMutationResolver;
+import graphql.kickstart.tools.GraphQLQueryResolver;
+import graphql.schema.DataFetchingEnvironment;
 
-public abstract class BaseResolver<T> implements GraphQLResolver<T> {
+public abstract class BaseResolver implements GraphQLQueryResolver, GraphQLMutationResolver {
 
-    private final ExecutorService executor =
-            Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
-
-    protected <F> CompletableFuture<F> processAsync(AsyncCallable<F> callable) {
-        return CompletableFuture.supplyAsync(callable::run, executor);
+    protected String getHeader(String name, DataFetchingEnvironment env) {
+        return ((DefaultGraphQLServletContext) env.getContext()).getHttpServletRequest().getHeader(name);
     }
 
-    protected interface AsyncCallable<T> {
-        T run();
+    protected String getClientId(DataFetchingEnvironment env) {
+        return this.getHeader("X-Client-Id", env);
     }
+
 }

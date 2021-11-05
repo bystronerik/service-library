@@ -66,7 +66,7 @@ public class MinioServiceImpl implements MinioService {
                     UUID.randomUUID().toString().replaceAll("-", "")
                             + fileName.substring(fileName.lastIndexOf("."));
             minioUtil.putObject(bucketName, file, objectName, fileType);
-            return minioProperties.getEndpoint() + "/" + bucketName + "/" + objectName;
+            return "/" + bucketName + "/" + objectName;
         } catch (Exception e) {
             e.printStackTrace();
             return " Upload failed ";
@@ -88,7 +88,7 @@ public class MinioServiceImpl implements MinioService {
                     UUID.randomUUID().toString().replaceAll("-", "")
                             + fileName.substring(fileName.lastIndexOf("."));
             minioUtil.putObject(bucketName, file, objectName, size, fileType);
-            return minioProperties.getEndpoint() + "/" + bucketName + "/" + objectName;
+            return "/" + bucketName + "/" + objectName;
         } catch (Exception e) {
             e.printStackTrace();
             return " Upload failed ";
