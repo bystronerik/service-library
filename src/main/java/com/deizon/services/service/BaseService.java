@@ -6,15 +6,16 @@ import com.deizon.services.model.Entity;
 import com.deizon.services.model.FindInput;
 import java.lang.reflect.InvocationTargetException;
 import java.time.Instant;
-import org.springframework.data.domain.Example;
-import org.springframework.data.mongodb.repository.MongoRepository;
+
+import com.deizon.services.repository.BaseRepository;
+import com.deizon.services.util.ExampleBuilder;
 
 public abstract class BaseService<
                 T extends Entity,
                 C extends U,
                 U,
                 F extends FindInput,
-                R extends MongoRepository<T, String>>
+                R extends BaseRepository<T>>
         implements Service<T, C, U, F> {
 
     private final Class<C> createInputClass;
@@ -35,36 +36,44 @@ public abstract class BaseService<
     }
 
     @Override
-    public T find(F input) {
+    public T find(F input, String clientId) {
         return repository
-                .findOne(createExample(input))
+                .findOne(processExample(createExample(input), clientId).create())
                 .orElseThrow(() -> new ItemNotFoundException(this.entityClass));
     }
 
     @Override
-    public Iterable<T> findAll(F input) {
-        return repository.findAll(createExample(input));
+    public Iterable<T> findAll(F input, String clientId) {
+        return repository.findAll(processExample(createExample(input), clientId).create());
+    }
+
+    private ExampleBuilder<T> processExample(ExampleBuilder<T> builder, String clientId) {
+        builder.field("clientId", () -> clientId, builder.getEntity()::setClientId);
+        builder.field("deleted", () -> false, builder.getEntity()::setDeleted);
+        return builder;
     }
 
     @Override
-    public T create(C data) {
-        return processData(createEntity(data), data);
+    public T create(C data, String clientId) {
+        final T entity = createEntity(data);
+        entity.setClientId(clientId);
+        return processData(entity, data);
     }
 
     @Override
-    public T update(String id, U data) {
+    public T update(String id, U data, String clientId) {
         return processData(
                 this.repository
-                        .findById(id)
+                        .findById(id, clientId)
                         .orElseThrow(() -> new ItemNotFoundException(this.entityClass)),
                 data);
     }
 
     @Override
-    public T delete(String id) {
+    public T delete(String id, String clientId) {
         final T entity =
                 this.repository
-                        .findById(id)
+                        .findById(id, clientId)
                         .orElseThrow(() -> new ItemNotFoundException(this.entityClass));
         entity.setDeleted(true);
         entity.setDeleteDate(Instant.now());
@@ -73,12 +82,12 @@ public abstract class BaseService<
     }
 
     @Override
-    public boolean totalDelete(String id) {
-        repository.deleteById(id);
+    public boolean totalDelete(String id, String clientId) {
+        repository.deleteById(id, clientId);
         return true;
     }
 
-    protected abstract Example<T> createExample(F input);
+    protected abstract ExampleBuilder<T> createExample(F input);
 
     protected T createEntity(C data) {
         try {

@@ -72,6 +72,10 @@ public class ExampleBuilder<T> {
         return Example.of(this.entity, this.matcher);
     }
 
+    public T getEntity() {
+        return this.entity;
+    }
+
     public interface DataGetter<T> {
         T get();
     }

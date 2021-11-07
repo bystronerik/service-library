@@ -12,6 +12,7 @@ import org.springframework.data.annotation.Id;
 public abstract class Entity {
 
     @Id private String id;
+    private String clientId;
 
     private Boolean deleted;
     private Instant deleteDate;
