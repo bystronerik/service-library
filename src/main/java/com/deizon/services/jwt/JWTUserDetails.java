@@ -3,7 +3,7 @@ package com.deizon.services.jwt;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
@@ -15,7 +15,7 @@ public class JWTUserDetails implements UserDetails {
 
     private final String username;
     private final String password;
-    private final List<SimpleGrantedAuthority> authorities;
+    private final List<GrantedAuthority> authorities;
     private final String token;
 
     @Override

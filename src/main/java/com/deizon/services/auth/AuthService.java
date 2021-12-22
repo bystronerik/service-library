@@ -7,13 +7,16 @@ import com.deizon.services.security.PrivateKeyProvider;
 import com.deizon.services.security.PublicKeyProvider;
 import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Component
 @RequiredArgsConstructor
@@ -28,12 +31,16 @@ public class AuthService {
     public JWTUserDetails loadUserByToken(String token) {
         final Jws<Claims> decoded = getDecodedToken(token);
         final Claims data = decoded.getBody();
-        return JWTUserDetails.builder().username(data.getSubject()).token(token).authorities((List<SimpleGrantedAuthority>) data.get("role")).build();
+        return JWTUserDetails.builder().username(data.getSubject()).token(token).authorities((List<GrantedAuthority>) data.get("permissions")).build();
     }
 
     public String generateToken(JWTUserDetails details, Instant expiration) {
+        final Map<String, Object> claims = new HashMap<>();
+        claims.put("permissions", details.getAuthorities());
+
         final JwtBuilder builder = Jwts.builder()
                 .setSubject(details.getUsername())
+                .setClaims(claims)
                 .setIssuedAt(Date.from(Instant.now()))
                 .setExpiration(Date.from(expiration))
                 .signWith(this.privateKeyProvider.getPrivateKey(this.config.getPrivateKeySourcePath()), SignatureAlgorithm.RS256);
