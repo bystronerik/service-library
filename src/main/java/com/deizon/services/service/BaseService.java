@@ -56,17 +56,26 @@ public abstract class BaseService<
     @Override
     public T create(C data, String clientId) {
         final T entity = createEntity(data);
+        preprocessCreate(entity, data, clientId);
         entity.setClientId(clientId);
         return processData(entity, data);
     }
 
+    public void preprocessCreate(T entity, C data, String clientId) {
+
+    }
+
     @Override
     public T update(String id, U data, String clientId) {
-        return processData(
-                this.repository
-                        .findById(id, clientId)
-                        .orElseThrow(() -> new ItemNotFoundException(this.entityClass)),
-                data);
+        final T entity = this.repository
+                .findById(id, clientId)
+                .orElseThrow(() -> new ItemNotFoundException(this.entityClass));
+        preprocessUpdate(entity, data, clientId);
+        return processData(entity, data);
+    }
+
+    public void preprocessUpdate(T entity, U data, String clientId) {
+
     }
 
     @Override
