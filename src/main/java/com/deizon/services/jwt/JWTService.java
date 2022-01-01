@@ -1,13 +1,12 @@
 package com.deizon.services.jwt;
 
 import com.deizon.services.security.PrivateKeyProvider;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-
 import java.time.Instant;
 import java.util.Date;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
@@ -24,7 +23,9 @@ public class JWTService {
                 .setIssuedAt(Date.from(now))
                 .setExpiration(Date.from(expiry))
                 .setIssuer(this.config.getTokenIssuer())
-                .signWith(this.keyProvider.getPrivateKey(this.config.getPrivateKeySourcePath()), SignatureAlgorithm.RS256)
+                .signWith(
+                        this.keyProvider.getPrivateKey(this.config.getPrivateKeySourcePath()),
+                        SignatureAlgorithm.RS256)
                 .claim("username", username)
                 .compact();
     }

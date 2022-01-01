@@ -4,14 +4,13 @@ import com.deizon.services.minio.config.MinioProperties;
 import com.deizon.services.minio.utils.MinioUtil;
 import com.deizon.services.model.FileUpload;
 import io.minio.messages.Bucket;
+import java.io.InputStream;
+import java.util.List;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.InputStream;
-import java.util.List;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -74,7 +73,8 @@ public class MinioServiceImpl implements MinioService {
     }
 
     @Override
-    public String putObject(String fileName, InputStream file, Long size, String fileType, String bucketName) {
+    public String putObject(
+            String fileName, InputStream file, Long size, String fileType, String bucketName) {
         try {
             bucketName =
                     StringUtils.isNotBlank(bucketName)
@@ -97,7 +97,8 @@ public class MinioServiceImpl implements MinioService {
 
     @Override
     public String putObject(String fileName, FileUpload file, String bucketName) {
-        return this.putObject(fileName, file.getContent(), file.getSize(), file.getContentType(), bucketName);
+        return this.putObject(
+                fileName, file.getContent(), file.getSize(), file.getContentType(), bucketName);
     }
 
     @Override

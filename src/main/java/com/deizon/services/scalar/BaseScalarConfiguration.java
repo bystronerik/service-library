@@ -51,5 +51,4 @@ public abstract class BaseScalarConfiguration {
                 .coercing(new CurrencyScalarCoercing())
                 .build();
     }
-
 }

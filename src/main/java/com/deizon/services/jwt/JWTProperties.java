@@ -1,11 +1,10 @@
 package com.deizon.services.jwt;
 
+import java.time.Duration;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.ConstructorBinding;
-
-import java.time.Duration;
 
 @Getter
 @ConstructorBinding
@@ -25,5 +24,4 @@ public class JWTProperties {
 
     /** Duration after which a token will expire */
     private final Duration tokenExpiration = Duration.ofDays(30);
-
 }

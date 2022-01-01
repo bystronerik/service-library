@@ -8,11 +8,12 @@ import graphql.schema.DataFetchingEnvironment;
 public abstract class BaseResolver implements GraphQLQueryResolver, GraphQLMutationResolver {
 
     protected String getHeader(String name, DataFetchingEnvironment env) {
-        return ((DefaultGraphQLServletContext) env.getContext()).getHttpServletRequest().getHeader(name);
+        return ((DefaultGraphQLServletContext) env.getContext())
+                .getHttpServletRequest()
+                .getHeader(name);
     }
 
     protected String getClientId(DataFetchingEnvironment env) {
         return this.getHeader("X-Client-Id", env);
     }
-
 }

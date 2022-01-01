@@ -2,9 +2,8 @@ package com.deizon.services.security;
 
 import com.deizon.services.util.Base64Util;
 import com.deizon.services.util.ResourceUtil;
-import org.springframework.stereotype.Component;
-
 import java.security.PrivateKey;
+import org.springframework.stereotype.Component;
 
 @Component
 public class PrivateKeyProvider extends BaseKeyProvider {
@@ -14,11 +13,6 @@ public class PrivateKeyProvider extends BaseKeyProvider {
     }
 
     public PrivateKey getPrivateKey(String resourcePath) {
-        return this.readKey(
-                resourcePath,
-                this::privateKeySpec,
-                this::privateKeyGenerator
-        );
+        return this.readKey(resourcePath, this::privateKeySpec, this::privateKeyGenerator);
     }
-
 }

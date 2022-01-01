@@ -17,5 +17,4 @@ public class FileUpload {
     public MediaType getMediaType() {
         return MediaType.parseMediaType(contentType);
     }
-
 }
